@@ -1,0 +1,84 @@
+version: "3"
+services:
+  vpn_schweiz:
+    image: nirvana777/nordvpn:latest
+#    network_mode: bridge
+    container_name: vpn_schweiz
+    cap_add:
+      - net_admin
+#    networks:
+#      - schweiz_network
+    devices:
+      - /dev/net/tun
+    env_file: /home/basti/env/nordvpn.env
+    environment:
+      - CONNECT=Switzerland
+      - TECHNOLOGY=OpenVPN
+      - OBFUSCATE=Enable
+      - NETWORK=192.168.77.0/24
+      - TZ=Europe/Berlin
+    ports:
+      - "8180:8180"
+      - "8181:8181"
+    restart: unless-stopped
+
+  telerising-zattoo:
+    container_name: telerising-zattoo
+    restart: unless-stopped 
+    image: takealug/telerising-api:latest
+    depends_on:
+      - vpn_schweiz
+    network_mode: "service:vpn_schweiz"     
+#    networks:
+#      - schweiz_network
+    env_file: /home/basti/env/zattoo.env
+    environment:
+      PUID: 1004
+      PGID: 44
+      PROVIDER: zattoo.com
+      UPDATE: "no"
+      PORT: 8180
+      BW: 5000
+      PROFILE: 1
+      AUDIO2: "true"
+      DOLBY: "true"
+#      RUN_OPTS: -C -u tvheadend -g video
+      TZ: Europe/Berlin
+      SSL_MODE: 1
+#    ports:
+#      - "8180:8180/tcp"      
+    volumes:
+      - /var/docker/telerising/zattoo/:/telerising
+#      - /mnt/hdd3/video/recordings/:/recordings
+#      - /var/tvheadend/:/config
+#      - '/mnt/hdd3/video/recordings/:/recordings'
+#networks:
+#  schweiz_network:
+
+  telerising-wilmaa:
+    container_name: telerising-wilmaa
+    restart: unless-stopped 
+    image: takealug/telerising-api:latest
+    depends_on:
+      - vpn_schweiz
+    network_mode: "service:vpn_schweiz"     
+#    networks:
+#      - schweiz_network
+    env_file: /home/basti/env/wilmaa.env
+    environment:
+      PUID: 1004
+      PGID: 44
+      PROVIDER: wilmaa.com
+      UPDATE: "no"
+      PORT: 8181
+      BW: 5000
+      PROFILE: 1
+      AUDIO2: "true"
+      DOLBY: "true"
+#      RUN_OPTS: -C -u tvheadend -g video
+      TZ: Europe/Berlin
+      SSL_MODE: 1
+#    ports:
+#      - "8180:8180/tcp"      
+    volumes:
+      - /var/docker/telerising/wilmaa/:/telerising
