@@ -1,0 +1,11 @@
+  watchtower:
+    container_name: watchtower
+    image: v2tec/watchtower
+    environment:
+      TZ: Europe/Berlin
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+#      - /root/.docker/config.json:/config.json
+    command: 'watchtower telerising-wilmaa telerising-zattoo pure-ftpd nextcloud-app nextcloud-proxy nextcloud-mariadb nextcloud-letsencrypt mosquitto openhab pihole tvheadend webgrabger samba emby portainer serviio easyepg --schedule "0 0 4 * * *" --cleanup'
+    restart: unless-stopped
+    
