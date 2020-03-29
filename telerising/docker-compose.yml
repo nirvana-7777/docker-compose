@@ -10,7 +10,7 @@ services:
 #      - schweiz_network
     devices:
       - /dev/net/tun
-    env_file: /home/basti/env/nordvpn.env
+    env_file: ~/env/nordvpn.env
     environment:
       - CONNECT=Switzerland
       - TECHNOLOGY=OpenVPN
@@ -31,7 +31,7 @@ services:
     network_mode: "service:vpn_schweiz"     
 #    networks:
 #      - schweiz_network
-    env_file: /home/basti/env/zattoo.env
+    env_file: ~/env/zattoo.env
     environment:
       PUID: 1004
       PGID: 44
@@ -64,7 +64,7 @@ services:
     network_mode: "service:vpn_schweiz"     
 #    networks:
 #      - schweiz_network
-    env_file: /home/basti/env/wilmaa.env
+    env_file: ~/env/wilmaa.env
     environment:
       PUID: 1004
       PGID: 44
