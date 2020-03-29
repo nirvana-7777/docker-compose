@@ -1,0 +1,11 @@
+  portainer:
+    container_name: portainer
+    image: portainer/portainer
+    environment:
+      TZ: Europe/Berlin
+    ports:
+      - "9000:9000/tcp"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/portainer:/data
+    restart: unless-stopped
