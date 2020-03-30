@@ -1,0 +1,24 @@
+version: '2.2'
+
+services:
+  openhab:
+    container_name: openhab
+    image: "openhab/openhab:latest"
+    restart: unless-stopped
+    network_mode: host
+    volumes:
+      - '/etc/localtime:/etc/localtime:ro'
+      - '/etc/timezone:/etc/timezone:ro'
+      - '/var/openhab/addons/:/openhab/addons'
+      - '/var/openhab/conf/:/openhab/conf'
+      - '/var/openhab/userdata/:/openhab/userdata'
+#    ports:
+#      - "8088:8088"
+#      - "8443:8443"      
+    environment:
+      OPENHAB_HTTP_PORT: "8088"
+      OPENHAB_HTTPS_PORT: "8443"
+      EXTRA_JAVA_OPTS: "-Duser.timezone=Europe/Berlin"
+      PUID: 1009
+      PGID: 1009
+     
