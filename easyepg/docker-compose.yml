@@ -1,6 +1,6 @@
-  easyepg2:
-    container_name: easyepg2
-    image: takealug/easyepg
+  easyepg:
+    container_name: easyepg
+    image: takealug/easyepg:latest
     environment:
       TZ: Europe/Berlin
       USER_ID: 1004

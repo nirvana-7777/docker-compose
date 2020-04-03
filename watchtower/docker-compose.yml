@@ -1,6 +1,6 @@
   watchtower:
     container_name: watchtower
-    image: v2tec/watchtower
+    image: containrrr/watchtower
     environment:
       TZ: Europe/Berlin
     volumes:
