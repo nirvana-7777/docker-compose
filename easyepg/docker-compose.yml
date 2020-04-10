@@ -1,3 +1,5 @@
+version: "3"
+services:
   easyepg:
     container_name: easyepg
     image: takealug/easyepg:latest
@@ -5,9 +7,12 @@
       TZ: Europe/Berlin
       USER_ID: 1004
       GROUP_ID: 44
-      FREQUENCY: 7 0,6,12,18 * * *
+      FREQUENCY: '7 0,6,12,18 * * *'
     volumes:
       - /var/docker/easyepg:/easyepg
       - /var/tvheadend/data:/easyepg/xml
+    tmpfs:
+      - /tmp
+      - /var/log      
     restart: unless-stopped
     
